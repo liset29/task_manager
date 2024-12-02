@@ -51,18 +51,3 @@ def get_valid_priority_input():
         print("Ошибка: приоритет должен быть 'Низкий', 'Средний' или 'Высокий'.")
         priority = input("Приоритет (Низкий/Средний/Высокий): ")
     return priority
-
-
-def update_task_details(task):
-    """Обновляет детали задачи, используя текущие значения или новые, введенные пользователем."""
-    title = input(f"Новое название (текущее: {task.title}): ")
-    description = input(f"Новое описание (текущее: {task.description}): ")
-    category = input(f"Новая категория (текущая: {task.category}): ")
-    due_date = get_valid_date_input()
-    priority = get_valid_priority_input()
-
-    task.title = title or task.title
-    task.description = description or task.description
-    task.category = category or task.category
-    task.due_date = due_date or task.due_date
-    task.priority = priority or task.priority

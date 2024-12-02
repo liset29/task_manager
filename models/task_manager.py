@@ -1,15 +1,12 @@
 import json
-from typing import List, Optional
-
+from typing import Optional
 from models.task import Task
 
 
-
 class TaskManager:
-    def __init__(self, file_path: str):
-        """Конструктор для создания менеджера задач."""
+    def __init__(self, file_path):
         self.file_path = file_path
-        self.tasks: List[Task] = []
+        self.tasks = []
         self.load_tasks()
 
     def load_tasks(self):
@@ -21,6 +18,9 @@ class TaskManager:
                 self.tasks = [Task.from_dict(task) for task in data]
         except FileNotFoundError:
             self.tasks = []
+            # Создаем пустой файл, если он не существует
+            with open(self.file_path, "w", encoding="utf-8") as file:
+                json.dump([], file, ensure_ascii=False, indent=4)
 
     def save_tasks(self):
         """Сохраняет все задачи в файл."""
@@ -52,5 +52,21 @@ class TaskManager:
         """Ищет задачи по ключевому слову в заголовке, описании или категории."""
         return [task for task in self.tasks if
                 keyword.lower() in task.title.lower()
-                or keyword.lower() in task.description.lower()
+                or keyword.lower() == task.status.lower()
                 or keyword.lower() in task.category.lower()]
+
+    def mark_task_as_completed(self, task_id: int):
+        """Отмечает задачу выполненной по ID."""
+        task = next((task for task in self.tasks if task.id == task_id), None)
+        if task:
+            task.mark_as_done()
+            self.save_tasks()
+            return True
+        return False
+
+    def update_task(self, task, **kwargs):
+        if task:
+            task.update(**kwargs)
+            self.save_tasks()
+            return True
+        return False

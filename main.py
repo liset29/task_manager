@@ -1,5 +1,5 @@
 from models.task_manager import TaskManager
-from utils import show_tasks, get_valid_date_input, get_valid_priority_input, update_task_details
+from utils import show_tasks, get_valid_date_input, get_valid_priority_input
 
 
 def main():
@@ -40,46 +40,42 @@ def main():
             print('Задача была добавлена')
 
         elif choice == "4":
-            while True:
-                try:
-                    task_id = int(input("Введите ID задачи для изменения: "))
-                    task = next((task for task in manager.tasks if task.id == task_id), None)
-                    if task:
-                        update_task_details(task)
-                        manager.save_tasks()
-                        print("Задача обновлена.")
-                        break
-                    else:
-                        print("Задача с таким ID не найдена.")
-                        break
-                except ValueError:
-                    print("Ошибка: введённый ID не является числом. Попробуйте снова.")
+            try:
+                task_id = int(input("Введите ID задачи для изменения: "))
+                task = next((task for task in manager.tasks if task.id == task_id), None)
+                if task:
+                    title = input(f"Новое название (текущее: {task.title}): ")
+                    description = input(f"Новое описание (текущее: {task.description}): ")
+                    category = input(f"Новая категория (текущая: {task.category}): ")
+                    due_date = get_valid_date_input()
+                    priority = get_valid_priority_input()
+                    manager.update_task(task, title=title, description=description, category=category,
+                                        due_date=due_date, priority=priority)
+
+                    print("Задача обновлена.")
+                else:
+                    print("Задача с таким ID не найдена.")
+            except ValueError:
+                print("Ошибка: введённый ID не является числом. Попробуйте снова.")
 
         elif choice == "5":
-            while True:
-                try:
-                    task_id = int(input("Введите ID задачи для удаления: "))
-                    manager.delete_task(task_id)
-                    print("Задача удалена.")
-                    break
-                except ValueError:
-                    print("Ошибка: введённый ID не является числом. Попробуйте снова.")
+            try:
+                task_id = int(input("Введите ID задачи для удаления: "))
+                manager.delete_task(task_id)
+                print("Задача удалена.")
+            except ValueError:
+                print("Ошибка: введённый ID не является числом. Попробуйте снова.")
 
         elif choice == "6":
-            while True:
-                try:
-                    task_id = int(input("Введите ID задачи, чтобы отметить как выполненную: "))
-                    task = next((task for task in manager.tasks if task.id == task_id), None)
-                    if task:
-                        task.status = "Выполнена"
-                        manager.save_tasks()
-                        print("Задача отмечена как выполненная.")
-                        break
-                    else:
-                        print("Задача с таким ID не найдена.")
-                        break
-                except ValueError:
-                    print("Ошибка: введённый ID не является числом. Попробуйте снова.")
+            try:
+                task_id = int(input("Введите ID задачи, чтобы отметить как выполненную: "))
+                if manager.mark_task_as_completed(task_id):
+                    print("Задача отмечена как выполненная.")
+                else:
+                    print("Задача с таким ID не найдена.")
+
+            except ValueError:
+                print("Ошибка: введённый ID не является числом. Попробуйте снова.")
 
         elif choice == "7":
             keyword = input("Введите ключевое слово для поиска (название, категория или статус выполнения): ")
