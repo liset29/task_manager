@@ -1,0 +1,83 @@
+[
+    {
+        "id": 2,
+        "title": "машина",
+        "description": "привезти лексус",
+        "category": "развлечение",
+        "due_date": "2024-30-12",
+        "priority": "высокий",
+        "status": "Выполнена"
+    },
+    {
+        "id": 3,
+        "title": "снова кушать ",
+        "description": "покушать ",
+        "category": "еда",
+        "due_date": "2021-123-123",
+        "priority": "средний ",
+        "status": "Выполнена"
+    },
+    {
+        "id": 4,
+        "title": "123",
+        "description": "132",
+        "category": "312",
+        "due_date": "3123",
+        "priority": "13",
+        "status": "Не выполнена"
+    },
+    {
+        "id": 5,
+        "title": "dfsa",
+        "description": "adfs",
+        "category": "fsda",
+        "due_date": "2024-12-12",
+        "priority": "Низкий",
+        "status": "Не выполнена"
+    },
+    {
+        "id": 6,
+        "title": "аыв",
+        "description": "фавы",
+        "category": "",
+        "due_date": "2024-12-12",
+        "priority": "низкий",
+        "status": "Не выполнена"
+    },
+    {
+        "id": 7,
+        "title": "авфы",
+        "description": "",
+        "category": "афвы",
+        "due_date": "2024-12-12",
+        "priority": "средний",
+        "status": "Не выполнена"
+    },
+    {
+        "id": 8,
+        "title": "ав",
+        "description": "ыфав",
+        "category": "ф",
+        "due_date": "2024-12-12",
+        "priority": "высокий",
+        "status": "Не выполнена"
+    },
+    {
+        "id": 9,
+        "title": "фавы",
+        "description": "авф",
+        "category": "ы",
+        "due_date": "2024-12-12",
+        "priority": "средний",
+        "status": "Не выполнена"
+    },
+    {
+        "id": 10,
+        "title": "пипа",
+        "description": "попа",
+        "category": "пупа",
+        "due_date": "2024-12-12",
+        "priority": "средний",
+        "status": "Не выполнена"
+    }
+]
